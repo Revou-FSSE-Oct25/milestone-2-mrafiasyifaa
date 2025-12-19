@@ -1,5 +1,9 @@
 # REVOFUN - Interactive Browser-Based Gaming Platform
 
+
+## Accessing the Website
+### [Visit the Live Site Here!](https://mrafiasyifaa.github.io/milestone-2-mrafiasyifaa/)
+
 ![Website Overview](assets/Website_Overview.png)
 
 ## Future Development Plans
@@ -43,13 +47,6 @@ The website demonstrates modern web development practices with semantic HTML str
 - Web Audio API: Sound effects and audio playback
 - localStorage API: Client-side data persistence for player names and leaderboards
 - DOM API: Dynamic content updates and user interactions
-
-## Accessing the Website
-
-### Live Deployment
-
-The website is deployed and accessible at:
-https://mrafiasyifaa.github.io/milestone-2-mrafiasyifaa/
 
 ### Local Development
 
