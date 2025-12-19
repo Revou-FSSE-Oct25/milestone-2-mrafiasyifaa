@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Number Guessing Game | REVOFUN</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <link rel="stylesheet" href="number-guessing-game.css">
+</head>
+
+<body>
+  <div class="game-wrapper">
+    <div class="game-container">
+      <div class="game-header">
+        <h1 class="game-title">Number Guessing Game</h1>
+        <p class="game-instructions">
+          I'm thinking of a number between 1 and 100. Can you guess it?
+        </p>
+      </div>
+
+      <div id="gameContainer">
+        <div class="input-section">
+          <label for="guessInput" class="input-label">Enter your guess:</label>
+          <div class="input-group">
+            <input type="number" id="guessInput" class="guess-input" min="1" max="100" placeholder="1-100" />
+            <button id="submitBtn" class="submit-btn">Guess!</button>
+          </div>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+
+        <div class="attempts-counter">
+          <p class="attempts-text">
+            Attempts remaining:
+            <span id="attemptsLeft" class="attempts-number">10</span>
+          </p>
+        </div>
+
+        <div id="previousGuesses" class="previous-guesses">
+          <p class="previous-guesses-title">Your previous guesses:</p>
+          <div id="guessList" class="guess-list"></div>
+        </div>
+      </div>
+
+      <div id="gameOverContainer" class="game-over">
+        <div id="gameOverMessage" class="game-over-message"></div>
+        <button id="resetBtn" class="reset-btn">Play Again</button>
+        <a href="home.html" class="back-link">Back to Home</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/games/number-guessing-game.js"></script>
+</body>
+
+</html>
