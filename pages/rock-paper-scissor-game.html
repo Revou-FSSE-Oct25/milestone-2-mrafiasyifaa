@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors | REVOFUN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="rock-paper-scissor-game.css">
+</head>
+
+<body>
+
+    <main class="game-container">
+        <header class="game-header">
+            <h1 class="game-title">Rock Paper Scissors</h1>
+            <p class="game-subtitle">Choose your weapon wisely!</p>
+        </header>
+        <div class="score-board">
+            <div class="score-item">
+                <span class="score-label">Your Score</span>
+                <span class="score-value" id="playerScore">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Draws</span>
+                <span class="score-value" id="draws">0</span>
+            </div>
+            <div class="score-item">
+                <span class="score-label">Computer</span>
+                <span class="score-value" id="computerScore">0</span>
+            </div>
+        </div>
+
+        <div class="game-arena">
+            <div class="player-choice-area">
+                <div class="choice-display" id="playerChoiceDisplay">
+                    <span class="choice-icon">❓</span>
+                </div>
+                <p class="choice-label">You</p>
+            </div>
+
+            <div class="vs-divider">VS</div>
+
+            <div class="computer-choice-area">
+                <div class="choice-display" id="computerChoiceDisplay">
+                    <span class="choice-icon">❓</span>
+                </div>
+                <p class="choice-label">Computer</p>
+            </div>
+        </div>
+
+        <div class="result-message" id="resultMessage">
+            Make your choice!
+        </div>
+
+        <div class="choices-container">
+            <button class="choice-btn" data-choice="rock" aria-label="Choose Rock">
+                <span class="choice-icon">🪨</span>
+                <span class="choice-name">Rock</span>
+            </button>
+            <button class="choice-btn" data-choice="paper" aria-label="Choose Paper">
+                <span class="choice-icon">📄</span>
+                <span class="choice-name">Paper</span>
+            </button>
+            <button class="choice-btn" data-choice="scissors" aria-label="Choose Scissors">
+                <span class="choice-icon">✂️</span>
+                <span class="choice-name">Scissors</span>
+            </button>
+        </div>
+
+        <div class="game-controls">
+            <button class="btn-secondary" id="resetBtn">Reset Scores</button>
+            <a href="home.html" class="btn-back">Back to Home</a>
+        </div>
+    </main>
+    </div>
+
+    <script src="../js/games/rock-paper-scissor-game.js"></script>
+</body>
+
+</html>

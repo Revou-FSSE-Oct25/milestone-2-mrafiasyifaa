@@ -1,3 +1,8 @@
+const MAX_ATTEMPTS = 10;
+const NUMBER_RANGE = { min: 1, max: 100 };
+const LEADERBOARD_KEY = 'leaderboard-guess';
+const MAX_LEADERBOARD_ENTRIES = 10;
+
 let targetNumber;
 let attemptsLeft;
 let gameActive;
@@ -19,8 +24,8 @@ const previousGuessesContainer = document.getElementById("previousGuesses");
  * Sets up all game variables and resets the UI
  */
 function initGame() {
-  targetNumber = Math.floor(Math.random() * 100) + 1;
-  attemptsLeft = 10;
+  targetNumber = Math.floor(Math.random() * NUMBER_RANGE.max) + NUMBER_RANGE.min;
+  attemptsLeft = MAX_ATTEMPTS;
   gameActive = true;
   previousGuesses = [];
 
@@ -37,8 +42,6 @@ function initGame() {
   previousGuessesList.innerHTML = "";
 
   guessInput.focus();
-
-  console.log("New game started! Target number:", targetNumber);
 }
 
 /**
@@ -144,6 +147,7 @@ function endGame(won) {
 
   if (won) {
     const attempts = 10 - attemptsLeft;
+    updateLeaderboard(attempts);
     gameOverMessage.innerHTML = `
             <h2 style="color: var(--color-primary); margin-bottom: 10px; font-family: var(--font-pixel); font-size: 1.3rem;">You Won!</h2>
             <p>You guessed the number <strong>${targetNumber}</strong> in <strong>${attempts}</strong> attempt${attempts === 1 ? "" : "s"
@@ -154,6 +158,41 @@ function endGame(won) {
             <h2 style="color: #F44336; margin-bottom: 10px; font-family: var(--font-pixel); font-size: 1.3rem;">Game Over</h2>
             <p>The number was <strong>${targetNumber}</strong>. Don't give up!</p>
         `;
+  }
+}
+
+/**
+ * Update leaderboard with current score (fewer attempts is better)
+ * @param {number} attempts
+ */
+function updateLeaderboard(attempts) {
+  try {
+    const heroName = localStorage.getItem('heroName') || 'Anonymous';
+    let leaderboard = JSON.parse(localStorage.getItem(LEADERBOARD_KEY) || '[]');
+
+    //console.log('Updating leaderboard:', { heroName, attempts, currentLeaderboard: leaderboard });
+
+    const existingIndex = leaderboard.findIndex(entry => entry.name === heroName);
+    
+    if (existingIndex !== -1) {
+      if (attempts < leaderboard[existingIndex].score) {
+        leaderboard[existingIndex].score = attempts;
+      }
+    } else {
+      leaderboard.push({
+        name: heroName,
+        score: attempts,
+        date: new Date().toISOString()
+      });
+    }
+
+    leaderboard.sort((a, b) => a.score - b.score);
+    leaderboard = leaderboard.slice(0, MAX_LEADERBOARD_ENTRIES);
+
+    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(leaderboard));
+    console.log('Leaderboard saved:', leaderboard);
+  } catch (e) {
+    console.error('Failed to update leaderboard:', e);
   }
 }
 

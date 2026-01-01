@@ -132,22 +132,30 @@ const mob = new Mob({
     },
 });
 
+/**
+ * Main game loop - Ngehandle rendering, updates, dan logika game per frame(?)
+ * Ngeloop game sampe game selesai atau user nutup jendela
+ */
 function gameLoop(){
     window.requestAnimationFrame(gameLoop);
     ctx.fillStyle = 'black';
     ctx.fillRect(0,0,canvas.width,canvas.height);
     
+    // Reset status attack ketika animasi attack selesai (frame terakhir tercapai)
     if(player.isAttacking && player.currentFrame === player.frameRate - 1 && player.elapsedFrames >= player.frameHold - 1){
         player.isAttacking = false;
     }
     
+    // Reset status hit mob setelah animasi hit selesai
     if(mob.isHit && mob.currentFrame === mob.frameRate - 1 && mob.elapsedFrames >= mob.frameHold - 1){
         mob.isHit = false;
     }
     
 
+    // Cek apakah attack hitbox player bersinggungan dengan hitbox mob (AABB collision detection)
     if(player.isAttacking && !mob.isHit){
         if(
+            // Cek overlap rectangle di keempat sisi
             player.attackHitbox.position.x < mob.hitbox.position.x + mob.hitbox.width &&
             player.attackHitbox.position.x + player.attackHitbox.width > mob.hitbox.position.x &&
             player.attackHitbox.position.y < mob.hitbox.position.y + mob.hitbox.height &&
@@ -156,6 +164,7 @@ function gameLoop(){
             mob.isHit = true;
             mobHitCount++;
             
+            // Trigger efek guncangan kamera saat hit
             cameraShake.intensity = 4;
             cameraShake.duration = 8;
             
@@ -204,19 +213,21 @@ function gameLoop(){
         }
     }
     
+    // Terapkan efek guncangan kamera dengan offset random yang berkurang seiring waktu
     let shakeX = 0;
     let shakeY = 0;
     if(cameraShake.duration > 0){
-        shakeX = (Math.random() - 0.5) * cameraShake.intensity;
+        shakeX = (Math.random() - 0.5) * cameraShake.intensity;  // Offset random antara -intensity/2 dan +intensity/2
         shakeY = (Math.random() - 0.5) * cameraShake.intensity;
         cameraShake.duration--;
-        cameraShake.intensity *= cameraShake.decay;
+        cameraShake.intensity *= cameraShake.decay;  // Kurangi intensitas guncangan secara bertahap
     }
     
+    // Simpan state context, scale viewport, dan terapkan posisi kamera dengan shake
     ctx.save();
-    ctx.scale(SCALE, SCALE);
+    ctx.scale(SCALE, SCALE);  // Scale dari resolusi native ke resolusi layar
     
-    ctx.translate(-camera.x + shakeX, -camera.y + shakeY);
+    ctx.translate(-camera.x + shakeX, -camera.y + shakeY);  // Gerakkan kamera dengan offset shake
     
     background.update();
     
@@ -231,10 +242,11 @@ function gameLoop(){
     
     ctx.restore();
     
+    // Update animasi pengisian huruf berdasarkan jumlah hit (indikator progress visual)
     const letters = document.querySelectorAll('.revofun-title .letter');
     letters.forEach((letter, index) => {
         if(index < mobHitCount){
-            letter.classList.add('filled');
+            letter.classList.add('filled');  // Isi huruf ketika hit yang sesuai tercapai
         } else {
             letter.classList.remove('filled');
         }
@@ -259,8 +271,13 @@ function gameLoop(){
                     return;
                 }
                 
-                localStorage.setItem('heroName', playerName);
-                window.location.href = 'pages/home.html';
+                try {
+                    localStorage.setItem('heroName', playerName);
+                    window.location.href = 'pages/home.html';
+                } catch (e) {
+                    console.error('Storage not available:', e);
+                    alert('Unable to save your name. Please check browser settings.');
+                }
             };
             
             nameInput.addEventListener('input', () => {
@@ -268,13 +285,13 @@ function gameLoop(){
                 nameInput.placeholder = 'Enter your name...';
             });
             
-            submitBtn.addEventListener('click', handleSubmit, { once: true });
+            submitBtn.addEventListener('click', handleSubmit);
             
             nameInput.addEventListener('keypress', (e) => {
                 if(e.key === 'Enter'){
                     handleSubmit();
                 }
-            }, { once: true });
+            });
         }, 500);
     }
 }

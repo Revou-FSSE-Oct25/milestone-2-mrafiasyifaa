@@ -62,10 +62,9 @@
                     </div>
                     <h3 class="game-title">Rock Paper Scissors</h3>
                     <p class="game-description">
-                        Challenge the computer in this classic hand game. Make your choice and see if you can outsmart
-                        the AI. Best of three wins!
+                        Make your choice and see if you can outsmart the AI.
                     </p>
-                    <a href="game-rps.html" class="game-btn">Play Now</a>
+                    <a href="rock-paper-scissor-game.html" class="game-btn">Play Now</a>
                 </article>
 
                 <article class="game-card">
@@ -81,7 +80,7 @@
                         Test your clicking speed and reflexes. Click as fast as you can within the time limit and beat
                         your high score!
                     </p>
-                    <a href="game-clicker.html" class="game-btn">Play Now</a>
+                    <a href="clicker-game.html" class="game-btn">Play Now</a>
                 </article>
 
                 <article class="game-card">
@@ -243,7 +242,13 @@
     </main>
 
     <script>
-        const heroName = localStorage.getItem('heroName');
+        let heroName;
+        try {
+            heroName = localStorage.getItem('heroName');
+        } catch (e) {
+            console.error('Storage not available:', e);
+        }
+
         if (heroName) {
             document.getElementById('heroName').textContent = heroName;
         } else {
@@ -289,7 +294,13 @@
             const games = ['rps', 'clicker', 'guess'];
 
             games.forEach(game => {
-                const leaderboardData = JSON.parse(localStorage.getItem(`leaderboard-${game}`) || '[]');
+                let leaderboardData = [];
+                try {
+                    leaderboardData = JSON.parse(localStorage.getItem(`leaderboard-${game}`) || '[]');
+                } catch (e) {
+                    console.error(`Failed to load leaderboard for ${game}:`, e);
+                }
+
                 const leaderboardElement = document.getElementById(`leaderboard-${game}`);
 
                 if (leaderboardData.length === 0) {

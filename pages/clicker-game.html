@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speed Clicker | REVOFUN</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="clicker-game.css">
+</head>
+
+<body>
+    <div class="game-wrapper">
+        <main class="game-container">
+            <header class="game-header">
+                <h1 class="game-title">Speed Clicker</h1>
+                <p class="game-subtitle">Click as fast as you can!</p>
+            </header>
+            <div class="game-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Time Left</span>
+                    <span class="stat-value" id="timeLeft">10.0</span>
+                </div>
+                <div class="stat-item stat-highlight">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="currentScore">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Best Score</span>
+                    <span class="stat-value" id="bestScore">0</span>
+                </div>
+            </div>
+
+            <div class="game-area" id="gameArea">
+                <div class="click-zone" id="clickZone">
+                    <div class="click-ripple"></div>
+                    <div class="click-text">START</div>
+                </div>
+            </div>
+
+            <div class="game-info">
+                <p id="gameMessage">Click the button to start!</p>
+            </div>
+
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+
+            <div class="game-over hidden" id="gameOver">
+                <h2 class="game-over-title">Time's Up!</h2>
+                <p class="final-score">Final Score: <span id="finalScore">0</span></p>
+                <div class="game-over-actions">
+                    <button class="btn-primary" id="playAgainBtn">Play Again</button>
+                </div>
+
+                <div class="game-controls">
+                    <button class="btn-secondary" id="resetBtn">Reset Best Score</button>
+                    <a href="home.html" class="btn-back-alt">Back to Home</a>
+                </div>
+        </main>
+
+        <div class="instructions">
+            <h3>How to Play:</h3>
+            <ul>
+                <li>Click the button to start the game</li>
+                <li>Click as fast as possible before time runs out</li>
+                <li>Try to beat your best score!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="../js/games/clicker-game.js"></script>
+</body>
+
+</html>
