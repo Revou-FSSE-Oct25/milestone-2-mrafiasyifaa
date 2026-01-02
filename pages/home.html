@@ -241,6 +241,8 @@
         </footer>
     </main>
 
+    <button id="retrySticky" class="retry-sticky" title="Retry and choose a different hero name">Retry</button>
+
     <script>
         let heroName;
         try {
@@ -254,6 +256,16 @@
         } else {
             window.location.href = '../index.html';
         }
+
+        const retryEl = document.getElementById('retrySticky');
+        retryEl.addEventListener('click', () => {
+            try {
+                localStorage.removeItem('heroName');
+            } catch (e) {
+                console.error('Storage not available:', e);
+            }
+            window.location.href = '../index.html';
+        });
 
         const contactForm = document.getElementById('contact-form');
         const formStatus = document.getElementById('form-status');

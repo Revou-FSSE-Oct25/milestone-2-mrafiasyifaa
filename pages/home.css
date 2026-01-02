@@ -491,3 +491,21 @@ main {
     grid-template-columns: 1fr;
   }
 }
+
+.retry-sticky {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 999;
+  background: var(--color-primary, #fdea3f);
+  color: var(--color-bg-dark, #111);
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.retry-sticky:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.32); }
