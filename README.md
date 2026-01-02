@@ -2,7 +2,7 @@
 
 
 ## Accessing the Website
-### [Visit the Live Site Here!](https://mrafiasyifaa.github.io/milestone-2-mrafiasyifaa/)
+### [Visit the Live Site Here!](https://revou-fsse-oct25.github.io/milestone-2-mrafiasyifaa/)
 
 ![Website Overview](assets/Website_Overview.png)
 
